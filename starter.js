@@ -3,8 +3,31 @@
 ////////////////////////
 
 // CODE HERE
+const add = (num1, num2) => num1 + num2
 
+const subtract = (num1, num2) => num1 - num2
+// const subtract = function(num1, num2) {
+//     return num1 - num2
+// } 
 
+const multiply = (num1, num2) => num1 * num2
+
+const divide = (num1, num2) => num1 / num2
+// function divide(num1, num2) {
+    //     return num1 / num2
+    // }
+
+const calculator = (num1, num2, cb) => {
+    if(+num1 && +num2) {
+        num1 = +num1
+        num2 = +num2
+        return cb(num1, num2)
+    } else {
+        console.log('Please only use numbers for the first arguements')
+    }
+}
+
+console.log(calculator(2, 3, add))
 ///////////////////////
 ////// PET STORE //////
 ///////////////////////
@@ -64,15 +87,54 @@ const catProducts = [
 ]
 
 // CODE HERE
+const applyDiscount = (product, discount) => {
+    product.displayPrice = product.basePrice * (1 - discount)
+}
 
+const changePrice = (arr, callback, discount) => {
+    console.log (arr, callback, discount)
+    arr.forEach ((product) => {
+        console.log(product)
+        callback (product, discount)
+    })
+}
 
+changePrice(dogProducts, applyDiscount, .10)
+console.log(dogProducts)
 
 ////////////////////////
 ////// SANDWICHES //////
 ////////////////////////
 
 // CODE HERE
+// Goal is to return a string that says, you have a {bread} sandwich with [ingredients]
 
+function selectBread(bread) {
+    return function(ingredients) {
+        let order = `You chose a ${bread} bread sandwich with `
+
+        const ingredientsFn = (ingredient, index) => {
+            if (index === Array.length - 1 && index !== 0) {
+                order += `and ${ingredient}.`
+            } else {
+                order += ingredient + " "
+            }
+        }
+
+        ingredients.forEach(ingredientsFn)
+
+        return order
+    }
+}
+
+const makeWhiteBreadSandwich = selectBread("White")
+const makeWheatBreadSandwich = selectBread("Wheat")
+
+let ing1 = ["tomato", "avacado", "bacon"]
+let ing2 = ["turkey", "ham"]
+
+console.log(makeWhiteBreadSandwich(ing1))
+console.log(makeWheatBreadSandwich(ing2))
 
 
 ////////////////////////////////////
@@ -138,7 +200,7 @@ const copyArrToSnakeCase = arr => {
 
 const colors = ['red', 'blue', 'yellow', 'green', 'orange']
 
-const mappedColors // = colors.map()
+// const mappedColors // = colors.map()
 
 /*
     Edit the formalGreeting function and use the built in .map method 
@@ -166,7 +228,7 @@ const formalGreeting = names => {
 
 const places = ['Binghampton', 'Albany', 'New York', 'Ithaca', 'Auburn', 'Rochester', 'Buffalo']
 
-const placesThatStartWithA // = places.filter()
+// const placesThatStartWithA // = places.filter()
 
 
 /*
@@ -244,4 +306,4 @@ const expenses = [
     }
 ]
 
-const remaining // = expenses.reduce(//callback, //initial value)
+// const remaining // = expenses.reduce(//callback, //initial value)
